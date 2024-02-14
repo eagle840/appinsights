@@ -1,0 +1,66 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "environmentTag": {
+            "type": "string",
+            "default": "dev"
+        },
+        "sharedAppInsightsName": {
+            "type": "string",
+            "default": "njb1402ai"
+        },
+        "sharedLogAnalyticsName": {
+            "type": "string",
+            "default": "njb1402la"
+        }
+    },
+    "variables": {
+        "fundingBuildingBlocksUrl": "https://raw.githubusercontent.com/SkillsFundingAgency/funding-platform-building-blocks/resourceTags/templates/"
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2018-05-01",
+            "name": "sharedAppInsights",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('fundingBuildingBlocksUrl'),'application-insights.json')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "environmentTag": {
+                        "value": "[parameters('environmentTag')]"
+                    },
+                    "appInsightsName": {
+                        "value": "[parameters('sharedAppInsightsName')]"
+                    }
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2019-10-01",
+            "name": "sharedLogAnalytics",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(variables('fundingBuildingBlocksUrl'),'log-analytics.json')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "environmentTag": {
+                        "value": "[parameters('environmentTag')]"
+                    },
+                    "logAnalyticsName": {
+                        "value": "[parameters('sharedLogAnalyticsName')]"
+                    },
+                    "logAnalyticsLocation": {
+                        "value": "West Europe"
+                    }
+                }
+            }
+        },
+    ]
+}
