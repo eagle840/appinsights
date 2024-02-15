@@ -1,0 +1,21 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "location": {
+        "value": "eastus"
+      },
+      "vmName": {
+        "value": "my-vm"
+      },
+      "vmSize": {
+        "value": "Standard_DS2_v2"
+      },
+      "adminUsername": {
+        "value": "adminuser"
+      },
+      "adminPassword": {
+        "value": "adminpassword"
+      }
+    }
+  }
