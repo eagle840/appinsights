@@ -19,10 +19,10 @@ jobs:
       - name: Deploy Azure Template
         uses: azure/CLI@v1
         with:
-          azcliversion: 2.0.72
+          azcliversion: 2.30.0
           inlineScript: |
             az deployment group create \
-              -l uksouth
+              -l uksouth \
               --resource-group njbappin \
               --template-file AzureTemplates/template.json \
               --parameters @AzureTemplates/parameters.json
