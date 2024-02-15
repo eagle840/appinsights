@@ -22,6 +22,5 @@ jobs:
           azcliversion: 2.30.0
           inlineScript: |
             az deployment group create \
-              --location uksouth \
               --resource-group njbappin \
               --template-file AzureTemplates/template.json 
