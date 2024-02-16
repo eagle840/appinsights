@@ -47,7 +47,7 @@
         {
             "type": "Microsoft.OperationalInsights/workspaces",
             "apiVersion": "2017-03-15-preview",
-            "name": "[parameters('logAnalyticsName')]",
+            "name": "[parameters('sharedLogAnalyticsName')]",
             "location": "[parameters('sharedLogAnalyticsName')]",
             "properties": {
                 "sku": {
