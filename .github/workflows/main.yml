@@ -24,4 +24,4 @@ jobs:
             az deployment group create \
               --resource-group njbappin \
               --template-file ArmTemplates/shared/template.json \
-              --parameters @ArmTemplates/shared/parameters.json
+              # --parameters @ArmTemplates/shared/parameters.json
