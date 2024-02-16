@@ -13,6 +13,20 @@
         "sharedLogAnalyticsName": {
             "type": "string",
             "defaultValue": "njb1402la"
+        },
+        "logAnalyticsSku": {
+            "type": "String",
+            "defaultValue": "pergb2018",
+            "metadata": {
+                "description": "Pricing Tier for Log Analytics"
+            }
+        },
+        "logAnalyticsSearchVersion": {
+            "type": "Int",
+            "defaultValue": 1,
+            "metadata": {
+                "description": "Current SearchVersion for Log Analytics (1)"
+            }
         }
     },
     "variables": {
@@ -20,47 +34,29 @@
     },
     "resources": [
         {
-            "type": "Microsoft.Resources/deployments",
-            "apiVersion": "2018-05-01",
-            "name": "sharedAppInsights",
+            "apiVersion": "2015-05-01",
+            "name": "[parameters('sharedAppInsightsName')]",
+            "type": "Microsoft.Insights/components",
+            "location": "[resourceGroup().location]",
+            "kind": "web",
             "properties": {
-                "mode": "Incremental",
-                "templateLink": {
-                    "uri": "[concat(variables('fundingBuildingBlocksUrl'),'application-insights.json')]",
-                    "contentVersion": "1.0.0.0"
-                },
-                "parameters": {
-                    "environmentTag": {
-                        "value": "[parameters('environmentTag')]"
-                    },
-                    "appInsightsName": {
-                        "value": "[parameters('sharedAppInsightsName')]"
-                    }
-                }
+              "Application_Type": "web"
             }
+          }
         },
         {
-            "type": "Microsoft.Resources/deployments",
-            "apiVersion": "2019-10-01",
-            "name": "sharedLogAnalytics",
+            "type": "Microsoft.OperationalInsights/workspaces",
+            "apiVersion": "2017-03-15-preview",
+            "name": "[parameters('logAnalyticsName')]",
+            "location": "[parameters('sharedLogAnalyticsName')]",
             "properties": {
-                "mode": "Incremental",
-                "templateLink": {
-                    "uri": "[concat(variables('fundingBuildingBlocksUrl'),'log-analytics.json')]",
-                    "contentVersion": "1.0.0.0"
+                "sku": {
+                    "name": "[parameters('logAnalyticsSku')]"
                 },
-                "parameters": {
-                    "environmentTag": {
-                        "value": "[parameters('environmentTag')]"
-                    },
-                    "logAnalyticsName": {
-                        "value": "[parameters('sharedLogAnalyticsName')]"
-                    },
-                    "logAnalyticsLocation": {
-                        "value": "West Europe"
-                    }
+                "features": {
+                    "searchVersion": "[parameters('logAnalyticsSearchVersion')]"
                 }
             }
-        },
+        }         
     ]
 }
