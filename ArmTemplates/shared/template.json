@@ -42,7 +42,7 @@
             "properties": {
               "Application_Type": "web"
             }
-          }
+          
         },
         {
             "type": "Microsoft.OperationalInsights/workspaces",
