@@ -4,15 +4,15 @@
     "parameters": {
         "environmentTag": {
             "type": "string",
-            "default": "dev"
+            "defaultValue": "dev"
         },
         "sharedAppInsightsName": {
             "type": "string",
-            "default": "njb1402ai"
+            "defaultValue": "njb1402ai"
         },
         "sharedLogAnalyticsName": {
             "type": "string",
-            "default": "njb1402la"
+            "defaultValue": "njb1402la"
         }
     },
     "variables": {
